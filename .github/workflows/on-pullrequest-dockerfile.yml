@@ -54,9 +54,6 @@ jobs:
 
       - name: Build
         run: |
-          path=${{matrix.dockerfile.path}}
-          folder=${path%/*}
-          cd $folder
           dockerfile=$(echo ${{matrix.dockerfile.path}} | awk -F"/" '{print $NF}')
 
           docker build -f $dockerfile -t ${{ matrix.dockerfile.name }} --build-arg="pre" .
