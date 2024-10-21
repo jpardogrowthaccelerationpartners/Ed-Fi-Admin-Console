@@ -95,7 +95,7 @@ jobs:
            cache-from: type=registry,ref=${{ env.IMAGE_NAME }}:pre
            cache-to: type=inline
            build-args: VERSION=pre
-           file: /Dockerfile
+           file: ./Dockerfile
            tags: pre
            labels: ${{ steps.metaapi.outputs.labels }}
            push: true
