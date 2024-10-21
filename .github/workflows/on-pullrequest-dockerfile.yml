@@ -95,12 +95,8 @@ jobs:
          uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09  # v5.0.0
          with:
            context: "{{defaultContext}}:/"
-           cache-from: type=registry,ref=${{ env.IMAGE_NAME }}:pre
-           cache-to: type=inline
-           build-args: VERSION=test
            file: docker/Dockerfile
            tags: pre
-           labels: ${{ steps.metaapi.outputs.labels }}
            push: true
  
        - name: Extract metadata (tags, labels) for admin api image
