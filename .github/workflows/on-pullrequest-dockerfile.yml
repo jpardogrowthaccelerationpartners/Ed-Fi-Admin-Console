@@ -20,7 +20,7 @@ on:
 env:
   DOCKER_USERNAME: "jpdga"
   DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
-  IMAGE_NAME: "edfi-console"
+  IMAGE_NAME: "jpdga/test"
 permissions: read-all
 
 jobs:
