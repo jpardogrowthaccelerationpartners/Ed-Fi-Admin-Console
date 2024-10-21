@@ -20,7 +20,7 @@ on:
 env:
   DOCKER_USERNAME: "jpdga"
   DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
-  IMAGE_NAME: "jpdga/test"
+  IMAGE_NAME: "edfi-console"
 permissions: read-all
 
 jobs:
@@ -97,7 +97,7 @@ jobs:
            context: "{{defaultContext}}:/"
            cache-from: type=registry,ref=${{ env.IMAGE_NAME }}:pre
            cache-to: type=inline
-           build-args: VERSION=pre
+           build-args: VERSION=test
            file: docker/Dockerfile
            tags: pre
            labels: ${{ steps.metaapi.outputs.labels }}
