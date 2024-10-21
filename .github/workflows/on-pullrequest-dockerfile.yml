@@ -14,7 +14,6 @@ on:
       - main
     paths:
       - ".github/workflows/on-pullrequest-dockerfile.yml"
-      - "Docker/*"
   workflow_dispatch:
 
 env:
@@ -34,7 +33,7 @@ jobs:
       matrix:
         dockerfile:
           [
-            { name: "development", path: "docker/Dockerfile", type: "local" },
+            { name: "development", path: "Dockerfile", type: "local" },
           ]
     steps:
       - name: Checkout code
