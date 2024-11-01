@@ -1,0 +1,43 @@
+# SPDX-License-Identifier: Apache-2.0
+# Licensed to the Ed-Fi Alliance under one or more agreements.
+# The Ed-Fi Alliance licenses this file to you under the Apache License, Version 2.0.
+# See the LICENSE and NOTICES files in the project root for more information.
+
+name: Monthly Report Execution
+
+on:
+  workflow_dispatch:
+
+permissions: read-all
+
+jobs:
+  setup-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          path: main
+
+      - name: Set Config File
+        run: mv config.ini.example config.ini
+        working-directory: ./main/eng/edfi-team-automated-reports
+
+      - name: Run Dependabot Script 
+        run: |
+          cd ./main/eng/edfi-team-automated-reports
+          python ./main/eng/edfi-team-automated-reports/github-dependabot-by-project.py
+        working-directory: ./main/
+
+      - name: Run JiraCloud Script 
+        run: |
+          cd ./main/eng/edfi-team-automated-reports
+          python ./main/eng/edfi-team-automated-reports/jira-cloud-issues-by-projects.py
+        working-directory: ./main/
+
+      - name: Push Reports generated
+        uses: dineshsonachalam/markdown-autodocs@v1.0.7
+        with: 
+          commit_user_email: jpardo@growthaccelerationpartners.com
+          commit_message: Push monthly report
+          branch: report-test
+          output_file_paths: '[./jira_report.md]'
