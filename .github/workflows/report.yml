@@ -24,12 +24,12 @@ jobs:
 
       - name: Run Dependabot Script 
         run: |
-          python ./main/eng/edfi-team-automated-reports/github-dependabot-by-project.py
+          python ./eng/edfi-team-automated-reports/github-dependabot-by-project.py
         working-directory: ./main/
 
       - name: Run JiraCloud Script 
         run: |
-          python ./main/eng/edfi-team-automated-reports/jira-cloud-issues-by-projects.py
+          python ./eng/edfi-team-automated-reports/jira-cloud-issues-by-projects.py
         working-directory: ./main/
 
       - name: Push Reports generated
