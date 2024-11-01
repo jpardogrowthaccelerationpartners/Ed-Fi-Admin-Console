@@ -11,11 +11,11 @@ on:
 permissions:  write-all
 
 env:
-    CI_COMMIT_MESSAGE: Add Reports  ${{ inputs.version }}
+    CI_COMMIT_MESSAGE: Add Reports 
     CI_COMMIT_AUTHOR: github-actions[bot]
     CI_COMMIT_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
     GITHUB_TOKEN: ${{secrets.GIT_TOKEN}}
-    BRANCH_NAME: openapi-${{ inputs.version }}
+    BRANCH_NAME: openapi-test
 
 jobs:
   report-execution:
