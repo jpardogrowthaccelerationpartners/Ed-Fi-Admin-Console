@@ -24,15 +24,13 @@ jobs:
 
       - name: Run Dependabot Script 
         run: |
-          cd ./main/eng/edfi-team-automated-reports
           python ./main/eng/edfi-team-automated-reports/github-dependabot-by-project.py
-        working-directory: ./main/
+        working-directory: ./main/eng/edfi-team-automated-reports
 
       - name: Run JiraCloud Script 
         run: |
-          cd ./main/eng/edfi-team-automated-reports
           python ./main/eng/edfi-team-automated-reports/jira-cloud-issues-by-projects.py
-        working-directory: ./main/
+        working-directory: ./main/eng/edfi-team-automated-reports
 
       - name: Push Reports generated
         uses: dineshsonachalam/markdown-autodocs@v1.0.7
