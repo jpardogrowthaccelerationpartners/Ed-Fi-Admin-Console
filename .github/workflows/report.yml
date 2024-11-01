@@ -57,7 +57,8 @@ jobs:
           commit_message: "${{ env.CI_COMMIT_MESSAGE }}"
           repo: ${{ github.repository }}
           branch: ${{ env.BRANCH_NAME }}
-          file_pattern: '*.md'
+          file_pattern: '*.yaml *.md'
 
       - name: Create PR
         run: gh pr create -B main -H ${{ env.BRANCH_NAME }} --title '[Github Action] 
+        working-directory: ./main/
