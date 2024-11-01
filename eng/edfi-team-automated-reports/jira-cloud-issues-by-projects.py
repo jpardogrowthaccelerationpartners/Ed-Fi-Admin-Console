@@ -7,7 +7,7 @@ import pprint
 
 # Read config.ini file
 config = configparser.ConfigParser()
-config.read("./config.ini")
+config.read("./eng/edfi-team-automated-reports/config.ini")
 
 # Load Jira configuration from config.ini
 jira_server = config["Jira"]["JIRA_BASE_URL"]

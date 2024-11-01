@@ -7,7 +7,7 @@ from string import Template
 
 # Load configuration from config.ini
 config = configparser.ConfigParser()
-config.read("./config.ini")
+config.read("./eng/edfi-team-automated-reports/config.ini")
 
 # Config variables
 github_token = config["GitHub"]["GITHUB_TOKEN"]
