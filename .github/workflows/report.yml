@@ -8,7 +8,14 @@ name: Monthly Report Execution
 on:
   workflow_dispatch:
 
-permissions: read-all
+permissions:  write-all
+
+env:
+    CI_COMMIT_MESSAGE: Add Reports  ${{ inputs.version }}
+    CI_COMMIT_AUTHOR: github-actions[bot]
+    CI_COMMIT_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+    GITHUB_TOKEN: ${{secrets.GIT_TOKEN}}
+    BRANCH_NAME: openapi-${{ inputs.version }}
 
 jobs:
   report-execution:
@@ -17,6 +24,11 @@ jobs:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
           path: main
+
+      - name: Git create branch
+        run: |
+          git checkout -b ${{ env.BRANCH_NAME }}
+          git push --set-upstream origin ${{ env.BRANCH_NAME }}
 
       - name: Set Config File
         run: mv config.ini.example config.ini
@@ -32,10 +44,19 @@ jobs:
           python ./eng/edfi-team-automated-reports/jira-cloud-issues-by-projects.py
         working-directory: ./main/
 
-      - name: Push Reports generated
-        uses: dineshsonachalam/markdown-autodocs@v1.0.7
-        with: 
-          commit_user_email: jpardo@growthaccelerationpartners.com
-          commit_message: Push monthly report
-          branch: report-test
-          output_file_paths: '[./jira_report.md]'
+      - name: Git add files
+        run: |
+          git add ./*.md
+        working-directory: ./main/
+
+      - name: Commit file
+        id: commit
+        uses: planetscale/ghcommit-action@4131649dbf2fdf1eb34421702972a5af7b0a8731
+        with:
+          commit_message: "${{ env.CI_COMMIT_MESSAGE }}"
+          repo: ${{ github.repository }}
+          branch: ${{ env.BRANCH_NAME }}
+          file_pattern: '*.md'
+
+      - name: Create PR
+        run: gh pr create -B main -H ${{ env.BRANCH_NAME }} --title '[Github Action] 
