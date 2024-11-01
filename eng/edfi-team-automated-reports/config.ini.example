@@ -1,7 +1,7 @@
 [Jira]
-JIRA_BASE_URL = https://your-domain.atlassian.net
-JIRA_USERNAME = your-email@example.com
-JIRA_API_TOKEN = your-api-token
+JIRA_BASE_URL = https://edfi.atlassian.net
+JIRA_USERNAME = jesus.pardo@contractor.dell.org
+JIRA_API_TOKEN = ${{ env.API_TOKEN }}
 
 [GitHub]
-GITHUB_TOKEN = sample-token
+GITHUB_TOKEN = ${{ env.GIT_TOKEN }}
