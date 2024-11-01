@@ -29,6 +29,7 @@ jobs:
         run: |
           git checkout -b ${{ env.BRANCH_NAME }}
           git push --set-upstream origin ${{ env.BRANCH_NAME }}
+        working-directory: ./main/
 
       - name: Set Config File
         run: mv config.ini.example config.ini
