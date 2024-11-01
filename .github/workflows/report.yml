@@ -11,7 +11,7 @@ on:
 permissions: read-all
 
 jobs:
-  setup-environment:
+  report-execution:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
@@ -25,12 +25,12 @@ jobs:
       - name: Run Dependabot Script 
         run: |
           python ./main/eng/edfi-team-automated-reports/github-dependabot-by-project.py
-        working-directory: ./main/eng/edfi-team-automated-reports
+        working-directory: ./main/
 
       - name: Run JiraCloud Script 
         run: |
           python ./main/eng/edfi-team-automated-reports/jira-cloud-issues-by-projects.py
-        working-directory: ./main/eng/edfi-team-automated-reports
+        working-directory: ./main/
 
       - name: Push Reports generated
         uses: dineshsonachalam/markdown-autodocs@v1.0.7
