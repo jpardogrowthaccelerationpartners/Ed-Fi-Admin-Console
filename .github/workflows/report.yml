@@ -47,6 +47,9 @@ jobs:
 
       - name: Git add files
         run: |
+          ls -la
+      - name: Git add files
+        run: |
           git add ./*.md
         working-directory: ./main/
 
@@ -57,8 +60,8 @@ jobs:
           commit_message: "${{ env.CI_COMMIT_MESSAGE }}"
           repo: ${{ github.repository }}
           branch: ${{ env.BRANCH_NAME }}
-          file_pattern: '*.yaml *.md'
+          file_pattern: '*.md'
 
       - name: Create PR
-        run: gh pr create -B main -H ${{ env.BRANCH_NAME }} --title 'Github Action'
+        run: gh pr create -B main -H ${{ env.BRANCH_NAME }} --title 'Github Action' --body 'Github Action'
         working-directory: ./main/
