@@ -88,7 +88,7 @@ jobs:
       #     branch: ${{ env.BRANCH_NAME }}
       #     file_pattern: '*.yaml *.md'
       #   working-directory: ./main
-      
+
       - uses: EndBug/add-and-commit@v9
         with:
           message: '${{ env.CI_COMMIT_MESSAGE }}'
@@ -102,3 +102,10 @@ jobs:
            from_branch: ${{ env.BRANCH_NAME }}
            target_branch: main
            github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Delete branch
+        uses: dawidd6/action-delete-branch@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branches: ${{ env.BRANCH_NAME }}
+          suffix: -done
