@@ -60,5 +60,5 @@ jobs:
           file_pattern: '*.yaml *.md'
 
       - name: Create PR
-        run: gh pr create -B main -H ${{ env.BRANCH_NAME }} --title '[Github Action] 
+        run: gh pr create -B main -H ${{ env.BRANCH_NAME }} --title '[Github Action]'
         working-directory: ./main/
