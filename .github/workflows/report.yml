@@ -20,8 +20,9 @@ env:
 jobs:
   report-execution:
     runs-on: ubuntu-latest
-    env: 
-       working-directory: ./main
+    defaults:
+      run:
+        working-directory: ./main
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
@@ -31,10 +32,11 @@ jobs:
         run: |
           git checkout -b ${{ env.BRANCH_NAME }}
           git push --set-upstream origin ${{ env.BRANCH_NAME }}
+        working-directory: ./main
 
       - name: Set Config File
         run: mv config.ini.example config.ini
-        working-directory: ./eng/edfi-team-automated-reports
+        working-directory: ./main/eng/edfi-team-automated-reports
 
       - name: Run Dependabot Script 
         run: |
