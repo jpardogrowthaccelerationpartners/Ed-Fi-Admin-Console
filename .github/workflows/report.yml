@@ -42,13 +42,13 @@ jobs:
         run: |
           python ./eng/edfi-team-automated-reports/github-dependabot-by-project.py
 
-      - name: Run JiraCloud Script 
-        run: |
-          python ./eng/edfi-team-automated-reports/jira-cloud-issues-by-projects.py
+      # - name: Run JiraCloud Script 
+      #   run: |
+      #     python ./eng/edfi-team-automated-reports/jira-cloud-issues-by-projects.py
 
       - name: Git add files
         run: |
-          git add ./jira_report.md ./github_dependabot_report.md
+          git add ./github_dependabot_report.md
 
       - name: Commit file
         id: commit
@@ -57,7 +57,7 @@ jobs:
           commit_message: "${{ env.CI_COMMIT_MESSAGE }}"
           repo: ${{ github.repository }}
           branch: ${{ env.BRANCH_NAME }}
-          file_pattern: '*.md'
+          file_pattern: '*.yaml *.md'
 
       - name: Create PR
         run: gh pr create -B main -H ${{ env.BRANCH_NAME }} --title 'Github Action' --body 'Github Action'
