@@ -11,7 +11,7 @@ config.read("./eng/edfi-team-automated-reports/config.ini")
 
 # Config variables
 github_token = config["GitHub"]["GITHUB_TOKEN"]
-markdown_output_file = "github_dependabot_report_" + datetime.now().strftime("%m/%d/%Y-%H:%M:%S") + ".md"
+markdown_output_file = "github_dependabot_report_" + datetime.now().strftime("%m-%d-%Y-%H:%M:%S") + ".md"
 
 # GitHub repositories
 edfi_repos = [

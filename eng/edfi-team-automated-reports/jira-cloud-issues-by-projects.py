@@ -15,7 +15,7 @@ jira_email = config["Jira"]["JIRA_USERNAME"]
 jira_token = config["Jira"]["JIRA_API_TOKEN"]
 
 # Config variables
-markdown_output_file = f"jira_report_" + datetime.now().strftime("%m/%d/%Y-%H:%M:%S") + ".md"
+markdown_output_file = f"jira_report_" + datetime.now().strftime("%m-%d-%Y-%H:%M:%S") + ".md"
 
 # TODO: move this to config.ini
 edfiProducts = ["DI", "APIPUB", "AA", "ADMINAPI"]
