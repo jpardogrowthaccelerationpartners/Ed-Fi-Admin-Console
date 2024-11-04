@@ -20,6 +20,8 @@ env:
 jobs:
   report-execution:
     runs-on: ubuntu-latest
+    env: 
+       working-directory: ./main
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
@@ -29,30 +31,22 @@ jobs:
         run: |
           git checkout -b ${{ env.BRANCH_NAME }}
           git push --set-upstream origin ${{ env.BRANCH_NAME }}
-        working-directory: ./main/
 
       - name: Set Config File
         run: mv config.ini.example config.ini
-        working-directory: ./main/eng/edfi-team-automated-reports
+        working-directory: ./eng/edfi-team-automated-reports
 
       - name: Run Dependabot Script 
         run: |
           python ./eng/edfi-team-automated-reports/github-dependabot-by-project.py
-        working-directory: ./main/
 
       - name: Run JiraCloud Script 
         run: |
           python ./eng/edfi-team-automated-reports/jira-cloud-issues-by-projects.py
-        working-directory: ./main/
 
       - name: Git add files
         run: |
-          ls -la
-        working-directory: ./main/
-      - name: Git add files
-        run: |
           git add ./jira_report.md ./github_dependabot_report.md
-        working-directory: ./main/
 
       - name: Commit file
         id: commit
@@ -65,4 +59,3 @@ jobs:
 
       - name: Create PR
         run: gh pr create -B main -H ${{ env.BRANCH_NAME }} --title 'Github Action' --body 'Github Action'
-        working-directory: ./main/
