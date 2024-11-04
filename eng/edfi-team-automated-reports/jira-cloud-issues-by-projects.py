@@ -14,6 +14,9 @@ jira_server = config["Jira"]["JIRA_BASE_URL"]
 jira_email = config["Jira"]["JIRA_USERNAME"]
 jira_token = config["Jira"]["JIRA_API_TOKEN"]
 
+# Config variables
+markdown_output_file = "jira_report.md"
+
 # TODO: move this to config.ini
 edfiProducts = ["DI", "APIPUB", "AA", "ADMINAPI"]
 
@@ -107,7 +110,7 @@ for product in edfiProducts:
 body = markdown_string(report_items)
 
 # Write Markdown content to file
-with open("jira_report.md", "w") as f:
+with open("docs/automated-reports/github-dependabot/" + markdown_output_file, "w") as f:
     f.write(body)
 
-print("Markdown report generated as 'jira_report.md'")
+print(f"Markdown report generated as '{markdown_output_file}'")

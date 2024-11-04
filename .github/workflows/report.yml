@@ -38,6 +38,34 @@ jobs:
         run: mv config.ini.example config.ini
         working-directory: ./main/eng/edfi-team-automated-reports
 
+      - name: Replace Base Url
+        uses: richardrigutins/replace-in-files@v2
+        with:
+          files: 'config.ini'
+          search-text: 'https://your-domain.atlassian.net'
+          replacement-text: 'https://edfi.atlassian.net'
+
+      - name: Replace Username
+        uses: richardrigutins/replace-in-files@v2
+        with:
+          files: 'config.ini'
+          search-text: 'your-email@example.com'
+          replacement-text: 'jesus.pardo@contractor.dell.org'
+
+      - name: Replace API Token
+        uses: richardrigutins/replace-in-files@v2
+        with:
+          files: 'config.ini'
+          search-text: 'your-api-token'
+          replacement-text: ${{secrets.API_TOKEN}}
+
+      - name: Replace Github Token
+        uses: richardrigutins/replace-in-files@v2
+        with:
+          files: 'config.ini'
+          search-text: 'sample-token'
+          replacement-text: ${{secrets.GIT_TOKEN}}
+
       - name: Run Dependabot Script 
         run: |
           python ./eng/edfi-team-automated-reports/github-dependabot-by-project.py
@@ -60,9 +88,10 @@ jobs:
       #     branch: ${{ env.BRANCH_NAME }}
       #     file_pattern: '*.yaml *.md'
       #   working-directory: ./main
+      
       - uses: EndBug/add-and-commit@v9
         with:
-          message: 'Test'
+          message: '${{ env.CI_COMMIT_MESSAGE }}'
           add: './github_dependabot_report.md --force'
           cwd: './main/'
 
@@ -73,7 +102,3 @@ jobs:
            from_branch: ${{ env.BRANCH_NAME }}
            target_branch: main
            github_token: ${{ secrets.GITHUB_TOKEN }}
-
-      # - name: Create PR
-      #   run: gh pr create -B main -H ${{ env.BRANCH_NAME }} --title 'Github Action' --body 'Github Action'
-      #   working-directory: ./main
