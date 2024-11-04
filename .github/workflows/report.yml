@@ -70,9 +70,10 @@ jobs:
         uses: devmasx/merge-branch@master
         with:
            type: now
+           from_branch: ${{ env.BRANCH_NAME }}
            target_branch: main
            github_token: ${{ secrets.GITHUB_TOKEN }}
-           
+
       # - name: Create PR
       #   run: gh pr create -B main -H ${{ env.BRANCH_NAME }} --title 'Github Action' --body 'Github Action'
       #   working-directory: ./main
