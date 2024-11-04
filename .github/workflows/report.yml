@@ -70,9 +70,9 @@ jobs:
         run: |
           python ./eng/edfi-team-automated-reports/github-dependabot-by-project.py
 
-      # - name: Run JiraCloud Script 
-      #   run: |
-      #     python ./eng/edfi-team-automated-reports/jira-cloud-issues-by-projects.py
+      - name: Run JiraCloud Script 
+        run: |
+          python ./eng/edfi-team-automated-reports/jira-cloud-issues-by-projects.py
 
       # - name: Git add files
       #   run: |
@@ -93,7 +93,9 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           message: '${{ env.CI_COMMIT_MESSAGE }}'
-          add: './docs/automated-reports/github-dependabot/github_dependabot_report.md --force'
+          add: |
+            - ./docs/automated-reports/github-dependabot/github_dependabot_report.md --force
+            - ./docs/automated-reports/github-dependabot/jira_report.md --force
           cwd: './main/'
 
       - name: Merge reports -> main
