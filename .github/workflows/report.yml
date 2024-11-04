@@ -95,7 +95,7 @@ jobs:
           message: '${{ env.CI_COMMIT_MESSAGE }}'
           add: |
             - ./docs/automated-reports/github-dependabot/github_dependabot_report.md --force
-            - ./docs/automated-reports/github-dependabot/jira_report.md --force
+            - ./docs/automated-reports/jira-issues/jira_report.md --force
           cwd: './main/'
 
       - name: Merge reports -> main
@@ -111,4 +111,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branches: ${{ env.BRANCH_NAME }}
-          suffix: -done
