@@ -110,7 +110,7 @@ for product in edfiProducts:
 body = markdown_string(report_items)
 
 # Write Markdown content to file
-with open("./docs/automated-reports/github-dependabot/" + markdown_output_file, "w") as f:
+with open("./docs/automated-reports/jira-issues/" + markdown_output_file, "w") as f:
     f.write(body)
 
 print(f"Markdown report generated as '{markdown_output_file}'")
