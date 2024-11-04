@@ -6,4 +6,4 @@
 |https://github.com/Ed-Fi-Alliance-OSS/AdminAPI-2.x/security/dependabot||0|0|0|0|0|
 
 
-_Last generated: 11/04/2024, 16:15:58_
+_Last generated: 11/04/2024, 16:30:32_
