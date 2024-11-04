@@ -66,6 +66,13 @@ jobs:
           add: './github_dependabot_report.md --force'
           cwd: './main/'
 
-      - name: Create PR
-        run: gh pr create -B main -H ${{ env.BRANCH_NAME }} --title 'Github Action' --body 'Github Action'
-        working-directory: ./main
+      - name: Merge staging -> uat
+        uses: devmasx/merge-branch@master
+        with:
+           type: now
+           target_branch: main
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           
+      # - name: Create PR
+      #   run: gh pr create -B main -H ${{ env.BRANCH_NAME }} --title 'Github Action' --body 'Github Action'
+      #   working-directory: ./main
