@@ -89,13 +89,14 @@ jobs:
       #     file_pattern: '*.yaml *.md'
       #   working-directory: ./main
 
-      - uses: EndBug/add-and-commit@v9
+      - name: Add and commit changes
+        uses: EndBug/add-and-commit@v9
         with:
           message: '${{ env.CI_COMMIT_MESSAGE }}'
-          add: './github_dependabot_report.md --force'
+          add: './docs/automated-reports/github-dependabot/github_dependabot_report.md --force'
           cwd: './main/'
 
-      - name: Merge staging -> uat
+      - name: Merge reports -> main
         uses: devmasx/merge-branch@master
         with:
            type: now
