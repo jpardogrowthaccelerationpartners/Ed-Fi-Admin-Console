@@ -46,20 +46,25 @@ jobs:
       #   run: |
       #     python ./eng/edfi-team-automated-reports/jira-cloud-issues-by-projects.py
 
-      - name: Git add files
-        run: |
-          git add ./github_dependabot_report.md
-        working-directory: ./main
+      # - name: Git add files
+      #   run: |
+      #     git add ./github_dependabot_report.md
+      #   working-directory: ./main
         
-      - name: Commit file
-        id: commit
-        uses: planetscale/ghcommit-action@4131649dbf2fdf1eb34421702972a5af7b0a8731
+      # - name: Commit file
+      #   id: commit
+      #   uses: planetscale/ghcommit-action@4131649dbf2fdf1eb34421702972a5af7b0a8731
+      #   with:
+      #     commit_message: "${{ env.CI_COMMIT_MESSAGE }}"
+      #     repo: ${{ github.repository }}
+      #     branch: ${{ env.BRANCH_NAME }}
+      #     file_pattern: '*.yaml *.md'
+      #   working-directory: ./main
+      - uses: EndBug/add-and-commit@v9
         with:
-          commit_message: "${{ env.CI_COMMIT_MESSAGE }}"
-          repo: ${{ github.repository }}
-          branch: ${{ env.BRANCH_NAME }}
-          file_pattern: '*.yaml *.md'
-        working-directory: ./main
+          message: 'Test'
+          add: './github_dependabot_report.md --force'
+          cwd: './main/'
 
       - name: Create PR
         run: gh pr create -B main -H ${{ env.BRANCH_NAME }} --title 'Github Action' --body 'Github Action'
