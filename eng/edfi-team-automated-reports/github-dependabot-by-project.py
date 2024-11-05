@@ -10,7 +10,7 @@ config = configparser.ConfigParser()
 config.read("./eng/edfi-team-automated-reports/config.ini")
 
 # Config variables
-github_token = config["GitHub"]["GITHUB_TOKEN"]
+github_token = config["GitHub"]["GH_TOKEN_REPO_ACCESS"]
 markdown_output_file = "github_dependabot_report_" + datetime.now().strftime("%m-%d-%Y-%H:%M:%S") + ".md"
 
 # GitHub repositories
