@@ -84,11 +84,12 @@ def get_issue_count(jql_query):
 report_items = []
 
 for product in edfiProducts.split(','):
+    product_name = product.strip('"')
     report_item = JiraReportItem()
-    report_item.product_name = f"{product}"
+    report_item.product_name = f"{product_name}"
 
     for index, query in enumerate(edfiQueries):
-        jql_query = Template(query).substitute(PRODUCT=product.strip('"'))
+        jql_query = Template(query).substitute(PRODUCT=product_name)
         issue_count = get_issue_count(jql_query)
 
         match index:
