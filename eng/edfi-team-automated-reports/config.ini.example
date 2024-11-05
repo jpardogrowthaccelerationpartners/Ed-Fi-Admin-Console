@@ -2,6 +2,9 @@
 JIRA_BASE_URL = https://your-domain.atlassian.net
 JIRA_USERNAME = your-email@example.com
 JIRA_API_TOKEN = your-api-token
+JIRA_PROJECT_LIST = "PRJ1,PRJ2"
 
 [GitHub]
-GITHUB_TOKEN = sample-token
+GH_TOKEN_REPO_ACCESS = sample-token
+GH_TOKEN_COMMIT_ACCESS = sample-token
+GH_PROJECT_LIST = "Ed-Fi-Project-1,Ed-Fi-Project-2"

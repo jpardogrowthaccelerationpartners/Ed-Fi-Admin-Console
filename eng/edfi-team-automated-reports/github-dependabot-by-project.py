@@ -14,14 +14,7 @@ github_token = config["GitHub"]["GITHUB_TOKEN"]
 markdown_output_file = "github_dependabot_report_" + datetime.now().strftime("%m-%d-%Y-%H:%M:%S") + ".md"
 
 # GitHub repositories
-edfi_repos = [
-    #"Ed-Fi-Alliance-OSS/Ed-Fi-ODS", "Ed-Fi-Alliance-OSS/Ed-Fi-ODS-Implementation",
-    "Ed-Fi-Alliance-OSS/Ed-Fi-ODS-AdminApp", "Ed-Fi-Alliance-OSS/Ed-Fi-API-Publisher",
-    "Ed-Fi-Alliance-OSS/Ed-Fi-AdminAPI-1.x", "Ed-Fi-Alliance-OSS/AdminAPI-2.x",
-    #"Ed-Fi-Alliance-OSS/Ed-Fi-DataImport", "Ed-Fi-Closed/MetaEd-js",
-    #"Ed-Fi-Exchange-OSS/Meadowlark", "Ed-Fi-Alliance-OSS/Roster-Starter-Kit-for-Vendors",
-    #"Ed-Fi-Alliance-OSS/Ed-Fi-LearningStandards-Client"
-]
+edfi_repos = config["GitHub"]["GH_PROJECT_LIST"]
 
 # Templates for GitHub API URLs
 github_url_template = "https://api.github.com/repos/${REPO}/dependabot/alerts?state=open"
@@ -55,16 +48,15 @@ def markdown_string(report_items):
 report_items = []
 
 # Fetch alerts for each repository
-for edfi_repo in edfi_repos:
+for edfi_repo in edfi_repos.split(','):
     item = JiraReportItem()
     item.repo = edfi_repo
-    url = Template(github_url_template).substitute(REPO=edfi_repo)
+    url = Template(github_url_template).substitute(REPO="Ed-Fi-Alliance-OSS/"+edfi_repo)
     response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
         response_json = json.loads(response.content)
         item.overall = len(response_json)
-        
         if response_json:
             for alert in response_json:
                 severity = alert["security_vulnerability"]["severity"]

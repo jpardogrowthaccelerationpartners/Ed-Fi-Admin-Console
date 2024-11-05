@@ -18,7 +18,7 @@ jira_token = config["Jira"]["JIRA_API_TOKEN"]
 markdown_output_file = f"jira_report_" + datetime.now().strftime("%m-%d-%Y-%H:%M:%S") + ".md"
 
 # TODO: move this to config.ini
-edfiProducts = ["DI", "APIPUB", "AA", "ADMINAPI"]
+edfiProducts = config["Jira"]["JIRA_PROJECT_LIST"]
 
 class JiraReportItem:
     def __init__(self):
@@ -83,7 +83,7 @@ def get_issue_count(jql_query):
 
 report_items = []
 
-for product in edfiProducts:
+for product in edfiProducts.split(','):
     report_item = JiraReportItem()
     report_item.product_name = f"{product}"
 

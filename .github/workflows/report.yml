@@ -6,16 +6,23 @@
 name: Monthly Report Execution
 
 on:
+  schedule:
+    - cron: "0 2 1 * *"
   workflow_dispatch:
 
 permissions:  write-all
 
 env:
-    CI_COMMIT_MESSAGE: Add Reports 
+    CI_COMMIT_MESSAGE: Uploading Reports 
     CI_COMMIT_AUTHOR: github-actions[bot]
-    CI_COMMIT_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
-    GITHUB_TOKEN: ${{secrets.GIT_TOKEN}}
-    BRANCH_NAME: openapi-test
+    GH_TOKEN_REPO_ACCESS: ${{secrets.GIT_TOKEN}}
+    GH_TOKEN_COMMIT_ACCESS: ${{secrets.GIT_TOKEN}}
+    API_TOKEN: ${{secrets.API_TOKEN}}
+    JIRA_BASE_URL: ${{vars.JIRA_BASE_URL}}
+    JIRA_USERNAME: ${{vars.JIRA_USERNAME}}
+    GH_PROJECT_LIST: ${{vars.GH_PROJECT_LIST}}
+    JIRA_PROJECT_LIST: ${{vars.JIRA_PROJECT_LIST}}
+    BRANCH_NAME: report-generated
 
 jobs:
   report-execution:
@@ -43,28 +50,42 @@ jobs:
         with:
           files: './main/eng/edfi-team-automated-reports/config.ini'
           search-text: 'https://your-domain.atlassian.net'
-          replacement-text: 'https://edfi.atlassian.net'
+          replacement-text: ${{ env.JIRA_BASE_URL }}
 
       - name: Replace Username
         uses: richardrigutins/replace-in-files@v2
         with:
           files: './main/eng/edfi-team-automated-reports/config.ini'
           search-text: 'your-email@example.com'
-          replacement-text: 'jesus.pardo@contractor.dell.org'
+          replacement-text: ${{ env.JIRA_USERNAME }}
 
       - name: Replace API Token
         uses: richardrigutins/replace-in-files@v2
         with:
           files: './main/eng/edfi-team-automated-reports/config.ini'
           search-text: 'your-api-token'
-          replacement-text: ${{secrets.API_TOKEN}}
+          replacement-text: ${{ env.API_TOKEN }}
 
       - name: Replace Github Token
         uses: richardrigutins/replace-in-files@v2
         with:
           files: './main/eng/edfi-team-automated-reports/config.ini'
           search-text: 'sample-token'
-          replacement-text: ${{secrets.GIT_TOKEN}}
+          replacement-text: ${{ env.GH_TOKEN_REPO_ACCESS }}
+
+      - name: Replace Github Token
+        uses: richardrigutins/replace-in-files@v2
+        with:
+          files: './main/eng/edfi-team-automated-reports/config.ini'
+          search-text: 'PRJ1,PRJ2'
+          replacement-text: ${{ env.JIRA_PROJECT_LIST }}
+
+      - name: Replace Github Token
+        uses: richardrigutins/replace-in-files@v2
+        with:
+          files: './main/eng/edfi-team-automated-reports/config.ini'
+          search-text: 'Ed-Fi-Project-1,Ed-Fi-Project-2'
+          replacement-text: ${{ env.GH_PROJECT_LIST }}
 
       - name: Run Dependabot Script 
         run: |
@@ -74,25 +95,11 @@ jobs:
         run: |
           python ./eng/edfi-team-automated-reports/jira-cloud-issues-by-projects.py
 
-      # - name: Git add files
-      #   run: |
-      #     git add ./github_dependabot_report.md
-      #   working-directory: ./main
-        
-      # - name: Commit file
-      #   id: commit
-      #   uses: planetscale/ghcommit-action@4131649dbf2fdf1eb34421702972a5af7b0a8731
-      #   with:
-      #     commit_message: "${{ env.CI_COMMIT_MESSAGE }}"
-      #     repo: ${{ github.repository }}
-      #     branch: ${{ env.BRANCH_NAME }}
-      #     file_pattern: '*.yaml *.md'
-      #   working-directory: ./main
-
       - name: Add and commit changes
         uses: EndBug/add-and-commit@v9
         with:
-          message: '${{ env.CI_COMMIT_MESSAGE }}'
+          message: ${{ env.CI_COMMIT_MESSAGE }}
+          author_name: ${{ env.CI_COMMIT_AUTHOR }}
           add: |
             - './docs/automated-reports/github-dependabot/*.md --force'
             - './docs/automated-reports/jira-issues/*.md --force'
@@ -104,11 +111,11 @@ jobs:
            type: now
            from_branch: ${{ env.BRANCH_NAME }}
            target_branch: main
-           github_token: ${{ secrets.GITHUB_TOKEN }}
+           github_token: ${{ env.GH_TOKEN_COMMIT_ACCESS }}
 
       - name: Delete branch
         if: always()
         uses: dawidd6/action-delete-branch@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ env.GH_TOKEN_COMMIT_ACCESS }}
           branches: ${{ env.BRANCH_NAME }}
