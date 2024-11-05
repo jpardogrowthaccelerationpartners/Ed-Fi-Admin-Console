@@ -49,9 +49,10 @@ report_items = []
 
 # Fetch alerts for each repository
 for edfi_repo in edfi_repos.split(','):
+    edfi_repo_name = edfi_repo.strip('"')
     item = JiraReportItem()
-    item.repo = edfi_repo.strip('"')
-    url = Template(github_url_template).substitute(REPO="Ed-Fi-Alliance-OSS/"+edfi_repo)
+    item.repo = edfi_repo_name
+    url = Template(github_url_template).substitute(REPO="Ed-Fi-Alliance-OSS/"+edfi_repo_name)
     response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
