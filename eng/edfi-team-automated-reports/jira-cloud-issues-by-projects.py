@@ -88,7 +88,7 @@ for product in edfiProducts.split(','):
     report_item.product_name = f"{product}"
 
     for index, query in enumerate(edfiQueries):
-        jql_query = Template(query).substitute(PRODUCT=product)
+        jql_query = Template(query).substitute(PRODUCT=product.strip('"'))
         issue_count = get_issue_count(jql_query)
 
         match index:
