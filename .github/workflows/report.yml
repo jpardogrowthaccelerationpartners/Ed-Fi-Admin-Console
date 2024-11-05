@@ -15,9 +15,9 @@ permissions:  write-all
 env:
     CI_COMMIT_MESSAGE: Uploading Reports 
     CI_COMMIT_AUTHOR: github-actions[bot]
-    GH_TOKEN_REPO_ACCESS: ${{secrets.GH_TOKEN_REPO_ACCESS}}
-    GH_TOKEN_COMMIT_ACCESS: ${{secrets.GH_TOKEN_COMMIT_ACCESS}}
-    JIRA_API_TOKEN: ${{secrets.JIRA_API_TOKEN}}
+    GH_TOKEN_REPO_ACCESS: ${{secrets.GIT_TOKEN}}
+    GH_TOKEN_COMMIT_ACCESS: ${{secrets.GIT_TOKEN}}
+    API_TOKEN: ${{secrets.API_TOKEN}}
     JIRA_BASE_URL: ${{vars.JIRA_BASE_URL}}
     JIRA_USERNAME: ${{vars.JIRA_USERNAME}}
     GH_PROJECT_LIST: ${{vars.GH_PROJECT_LIST}}
@@ -64,7 +64,7 @@ jobs:
         with:
           files: './main/eng/edfi-team-automated-reports/config.ini'
           search-text: 'your-api-token'
-          replacement-text: ${{ env.JIRA_API_TOKEN }}
+          replacement-text: ${{ env.API_TOKEN }}
 
       - name: Replace Github Token
         uses: richardrigutins/replace-in-files@v2
