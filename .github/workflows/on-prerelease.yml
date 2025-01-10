@@ -152,3 +152,5 @@ jobs:
       base64-subjects: ${{ needs.azure-publish.outputs.hash-code }}
       provenance-name: admin*.intoto.jsonl
       upload-assets: true
+      # TODO: remove this after this issue is resolved: https://github.com/slsa-framework/slsa-github-generator/issues/876
+      compile-generator: true
