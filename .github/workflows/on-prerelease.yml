@@ -67,7 +67,9 @@ jobs:
         uses: actions/download-artifact@6b208ae046db98c579e8a3aa621ab581ff575935 #v4.1.1
         with:
           repository: Ed-Fi-Alliance-OSS/Ed-Fi-Admin-Console
-
+      - name: list
+        run: |
+          ls
       - name: Generate Software Bill of Materials (SBOM) - API
         shell: pwsh
         run: |
