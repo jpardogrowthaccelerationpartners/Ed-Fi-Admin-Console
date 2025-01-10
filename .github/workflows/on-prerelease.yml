@@ -112,7 +112,7 @@ jobs:
         uses: slsa-framework/slsa-github-generator/.github/actions/secure-download-artifact@07e64b653f10a80b6510f4568f685f8b7b9ea830
         with:
           name: admin-console-SBOM
-          path: _manifest/spdx_2.2/manifest.spdx.json
+          path: "_manifest/spdx_2.2/manifest.spdx.json"
           sha256: "${{ needs.sbom-create.outputs.sbom-hash-code }}"
 
       - name: Attach to release
@@ -156,7 +156,7 @@ jobs:
     uses: Ed-Fi-Alliance-OSS/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@main
     with:
       base64-subjects: ${{ needs.azure-publish.outputs.hash-code }}
-      provenance-name: admin-console.intoto.jsonl
+      provenance-name: admin_console.intoto.jsonl
       upload-assets: true
       # TODO: remove this after this issue is resolved: https://github.com/slsa-framework/slsa-github-generator/issues/876
       compile-generator: true
