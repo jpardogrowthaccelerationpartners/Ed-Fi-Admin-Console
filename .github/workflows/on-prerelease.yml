@@ -66,7 +66,8 @@ jobs:
       - name: Get Artifacts
         uses: actions/download-artifact@6b208ae046db98c579e8a3aa621ab581ff575935 #v4.1.1
         with:
-          name: npm @edfi/admin-console-web
+          name: npm
+          repository: Ed-Fi-Alliance-OSS/Ed-Fi-Admin-Console
 
       - name: Generate Software Bill of Materials (SBOM) - API
         shell: pwsh
