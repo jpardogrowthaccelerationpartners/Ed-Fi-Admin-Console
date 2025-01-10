@@ -118,7 +118,7 @@ jobs:
       - name: Attach to release
         shell: pwsh
         run: |
-          $release = "${{ env.github.ref_name }}"
+          $release = "${{ github.ref_name }}"
           $repo = "${{ github.repository }}"
           $token = "${{ secrets.GITHUB_TOKEN }}"
           $file = "_manifest/spdx_2.2/manifest.spdx.json"
@@ -143,9 +143,7 @@ jobs:
               -Uri "$($url)?name=$($uploadName)" `
               -Headers $gh_headers `
               -InFile $uploadName
-      - name: list
-        run: |
-          ls
+
   provenance-create:
     name: Create Provenance
     needs: azure-publish
