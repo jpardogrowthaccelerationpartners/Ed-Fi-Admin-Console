@@ -54,7 +54,7 @@ jobs:
 
       - name: Build
         run: |
-          docker build -f ${{matrix.dockerfile.path}} -t ${{ matrix.dockerfile.name }} --build-arg="pre" .
+          docker build -f ${{matrix.dockerfile.path}}  -t ${{ matrix.dockerfile.name }} --build-arg="pre" .
 
       - name: Analyze
         uses: docker/scout-action@67eb1afe777307506aaecb9acd9a0e0389cb99ae # v1.5.0
