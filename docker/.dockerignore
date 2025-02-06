@@ -18,3 +18,9 @@ Compose
 **/local.config.json
 **/config.example.json
 **/config.example.ports.json
+docker
+eng
+.github
+docs
+e2e
+.npmrc
