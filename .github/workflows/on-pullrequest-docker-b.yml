@@ -20,7 +20,7 @@ on:
   #   paths:
   #     - ".github/workflows/on-pullrequest-dockerfile.yml"
   #     - "/*"
-  #   workflow_dispatch:
+  workflow_dispatch:
 
 env:
   DOCKER_USERNAME: ${{ vars.DOCKER_USERNAME }}
