@@ -44,7 +44,7 @@ jobs:
           # Install the MinVer CLI tool
           &dotnet tool install --global minver-cli
 
-          $adminVersion = $(minver -t $apiPrefix)
+          $adminVersion = $(minver -t $adminPrefix)
 
           # Full release name
           "admin-console=$adminVersion" >> $env:GITHUB_OUTPUT
