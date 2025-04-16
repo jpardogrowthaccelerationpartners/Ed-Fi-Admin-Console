@@ -93,7 +93,8 @@ jobs:
       matrix:
         dockerfile:
           [
-            { name: "development", path: "docker/Dockerfile", type: "local" },
+            { name: "development", path: "Dockerfile.dev", type: "local" },
+            { name: "production", path: "Dockerfile", type: "production" }
           ]
     steps:
       - name: Checkout code
