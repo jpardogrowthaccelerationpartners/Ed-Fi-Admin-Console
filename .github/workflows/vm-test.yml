@@ -8,6 +8,7 @@ name: Start AdminConsole Azure
 on:
   schedule:
     - cron: "30 8 * * 1-5"
+  workflow_dispatch:
 
 jobs:
   startvm:
