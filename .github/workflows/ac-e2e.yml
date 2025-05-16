@@ -44,7 +44,7 @@ jobs:
         working-directory: ./main/
 
       - name: Install playwright dependencies
-        run: npx playwright install --with-deps
+        run: npx playwright install
         working-directory: ./main/
 
       - name: Run test
