@@ -48,7 +48,10 @@ jobs:
         working-directory: ./main/
 
       - name: Run test
-        run: npm run tests
+        run: |
+          npm run tests
+          EXIT_CODE=$?
+          echo "Test exit code: $EXIT_CODE"
         working-directory: ./main/
 
       - name: Get Docker logs
