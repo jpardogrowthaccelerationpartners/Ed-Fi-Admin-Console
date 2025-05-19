@@ -76,7 +76,6 @@ test('Should show Summary Tab', async () => {
   await expect(page.getByText('Ed-Fi Version')).toBeVisible()
   await expect(page.getByText('Instance Type')).toBeVisible()
   await expect(page.getByText('Instance Management Worker Status')).toBeVisible()
-  await expect(page.getByText('Ed-Fi Version')).toBeVisible()
 })
 
 test.skip('Should show instance data if Onboarding Wizard has been finished', async ({ page }) => {
