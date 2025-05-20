@@ -32,7 +32,7 @@ const openAddInstanceForm = async (page: Page) => {
 
 let page: Page
 
-test.beforeEach(async ({ browser }) => {
+test.beforeAll(async ({ browser }) => {
   page = await browser.newPage()
   await page.goto(routes.home)
   await page.waitForURL(routes.home)
@@ -42,6 +42,7 @@ test.beforeEach(async ({ browser }) => {
   await addInstanceFormHelper(page, instanceData)
   await page.getByRole('button', { name: addInstanceSaveButton }).click()
   await page.waitForLoadState('networkidle')
+  
   // Open the instance page
   await page.getByRole('link', {
     name: uniqueInstanceName,
@@ -51,7 +52,8 @@ test.beforeEach(async ({ browser }) => {
   await page.waitForLoadState('networkidle')
 })
 
-test.afterEach(async ({ browser }) => {
+test.afterAll(async ({ browser }) => {
+  await page.close()
   await browser.close()
 })
 
