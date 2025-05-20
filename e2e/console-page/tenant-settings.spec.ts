@@ -34,12 +34,17 @@ test.describe('Home Page Tests', () => {
   })
 
   test('should navigate back to home when clicking "Back to Tech Console Home"', async () => {
-    const tenantInstanceAction = page.locator('a:has-text("Tenant Instance Settings")')
-    await page.getByRole('link', { name: 'Tenant Instance Settings' }).click()
-    await page.waitForLoadState('networkidle')
-    // Click the "Back to Tech Console Home" link
-    await page.getByRole('link', { name: 'Back to Tech Console Home' }).click()
-    // Verify that the URL is the expected home page
-    await expect(page).toHaveURL(routes.home)
-  })
+  const tenantInstanceLink = page.getByRole('link', { name: 'Tenant Instance Settings' })
+  await tenantInstanceLink.waitFor({ state: 'visible', timeout: 10000 })
+
+  await tenantInstanceLink.click()
+  await page.waitForLoadState('networkidle')
+
+  const backLink = page.getByRole('link', { name: 'Back to Tech Console Home' })
+  await backLink.waitFor({ state: 'visible', timeout: 10000 })
+
+  await backLink.click()
+  await expect(page).toHaveURL(routes.home)
+})
+
 })
