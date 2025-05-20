@@ -35,6 +35,7 @@ test.describe('Home Page Tests', () => {
 
   test('should navigate back to home when clicking "Back to Tech Console Home"', async () => {
   const tenantInstanceLink = page.getByRole('link', { name: 'Tenant Instance Settings' })
+  await page.waitForLoadState('networkidle')
   await tenantInstanceLink.waitFor({ state: 'visible', timeout: 10000 })
 
   await tenantInstanceLink.click()
