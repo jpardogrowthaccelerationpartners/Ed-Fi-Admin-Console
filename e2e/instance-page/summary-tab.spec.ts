@@ -32,7 +32,7 @@ const openAddInstanceForm = async (page: Page) => {
 
 let page: Page
 
-test.beforeAll(async ({ browser }) => {
+test.beforeEach(async ({ browser }) => {
   page = await browser.newPage()
   await page.goto(routes.home)
   await page.waitForURL(routes.home)
@@ -51,7 +51,7 @@ test.beforeAll(async ({ browser }) => {
   await page.waitForLoadState('networkidle')
 })
 
-test.afterAll(async ({ browser }) => {
+test.afterEach(async ({ browser }) => {
   await browser.close()
 })
 
