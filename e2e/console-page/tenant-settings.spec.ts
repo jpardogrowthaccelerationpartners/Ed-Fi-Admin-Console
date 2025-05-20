@@ -12,7 +12,7 @@ let page: Page
 
 test.describe('Home Page Tests', () => {
 
-  test.beforeAll(async ({ browser }) => {
+  test.beforeEach(async ({ browser }) => {
     page = await browser.newPage()
     await page.goto(routes.home)
     await page.waitForURL(routes.home)
