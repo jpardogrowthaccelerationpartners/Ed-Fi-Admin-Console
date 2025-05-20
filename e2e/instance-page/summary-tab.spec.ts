@@ -42,13 +42,6 @@ test.beforeAll(async ({ browser }) => {
   await addInstanceFormHelper(page, instanceData)
   await page.getByRole('button', { name: addInstanceSaveButton }).click()
   await page.waitForLoadState('networkidle')
-})
-
-test.beforeEach(async ({ browser }) => {
-  page = await browser.newPage()
-  await page.goto(routes.home)
-  await page.waitForURL(routes.home)
-  await page.waitForLoadState('networkidle', { timeout: 35000 })
   // Open the instance page
   await page.getByRole('link', {
     name: uniqueInstanceName,
